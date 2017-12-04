@@ -11,10 +11,11 @@ namespace WebAppPB2___Breno_nogueira__.Models
     {
         [Key]
         [Column(Order = 1)]
-        string Id;
+        public int Id { get; set; }
         [Required(ErrorMessage = "Titulo Obrigatorio")]
-        string Titulo;
-        [Required(ErrorMessage = "Tipo Obrigatorio")]
+        public string Titulo { get; set; }
+        [Required(ErrorMessage = "Descrição Obrigatoria")]
+        public string Descricao { get; set; }
         Tipo Tipo;
     }
 }
