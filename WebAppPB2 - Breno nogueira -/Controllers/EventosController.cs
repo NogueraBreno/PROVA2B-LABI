@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +16,24 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         private EventoContext db = new EventoContext();
 
         // GET: Eventos
-        public ActionResult Index()
+        public ActionResult Index(string ordenacao, int? pagina)
         {
-            return View(db.Eventoes.ToList());
+            ViewBag.OrdenacaoAtual = ordenacao;
+            ViewBag.TituloParam = String.IsNullOrEmpty(ordenacao) ? "Titulo_desc" : "";
+            ViewBag.CategoriaParam = ordenacao == "Categoria" ? "Categoria_desc" : "Categoria";
+            ViewBag.TipoParam = ordenacao == "Tipo" ? "Tipo_desc" : "Tipo";
+
+            var eventos = from e in db.Eventoes select e;
+
+            int tamanhoPagina = 3;
+            int numeroPagina = pagina ?? 1;
+
+            switch (ordenacao)
+            {
+            }
+
+
+            return View(eventos.ToPagedList(numeroPagina, tamanhoPagina));
         }
 
         // GET: Eventos/Details/5
@@ -38,12 +54,11 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         // GET: Eventos/Create
         public ActionResult Create()
         {
+            TempData["MensagemC"] = "Evento Cadastrado com Sucesso!";
+
             return View();
         }
 
-        // POST: Eventos/Create
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Titulo,Descricao")] Evento evento)
@@ -73,13 +88,13 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
             return View(evento);
         }
 
-        // POST: Eventos/Edit/5
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Titulo,Descricao")] Evento evento)
         {
+            TempData["MensagemU"] = "Evento Atualizado com Sucesso!";
+
             if (ModelState.IsValid)
             {
                 db.Entry(evento).State = EntityState.Modified;
@@ -92,6 +107,8 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         // GET: Eventos/Delete/5
         public ActionResult Delete(int? id)
         {
+           TempData["MensagemD"] = "Evento Excluido com Sucesso!";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
