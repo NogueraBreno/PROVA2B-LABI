@@ -15,10 +15,10 @@ namespace WebAppPB2___Breno_nogueira__.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public EventoContext() : base("name=EventoContext")
+        public EventoContext() : base("name=Strconexao")
         {
         }
 
-        public System.Data.Entity.DbSet<WebAppPB2___Breno_nogueira__.Models.Evento> Eventoes { get; set; }
+        public System.Data.Entity.DbSet<WebAppPB2___Breno_nogueira__.Models.Evento> Eventos { get; set; }
     }
 }

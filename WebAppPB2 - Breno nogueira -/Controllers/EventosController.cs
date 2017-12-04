@@ -20,16 +20,25 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         {
             ViewBag.OrdenacaoAtual = ordenacao;
             ViewBag.TituloParam = String.IsNullOrEmpty(ordenacao) ? "Titulo_desc" : "";
-            ViewBag.CategoriaParam = ordenacao == "Categoria" ? "Categoria_desc" : "Categoria";
-            ViewBag.TipoParam = ordenacao == "Tipo" ? "Tipo_desc" : "Tipo";
+            ViewBag.DescricaoParam = ordenacao == "Tipo" ? "Tipo_desc" : "Tipo";
 
-            var eventos = from e in db.Eventoes select e;
+            var eventos = from e in db.Eventos select e;
 
             int tamanhoPagina = 3;
             int numeroPagina = pagina ?? 1;
 
             switch (ordenacao)
             {
+                case "Titulo_desc":
+                    eventos = eventos.OrderByDescending(s => s.Titulo);
+                    break;
+                case "Descricao":
+                    eventos = eventos.OrderBy(s => s.Descricao);
+                    break;
+                case "Descricao_desc":
+                    eventos = eventos.OrderByDescending(s => s.Descricao);
+                    break;
+
             }
 
 
@@ -43,7 +52,7 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Evento evento = db.Eventoes.Find(id);
+            Evento evento = db.Eventos.Find(id);
             if (evento == null)
             {
                 return HttpNotFound();
@@ -65,7 +74,7 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Eventoes.Add(evento);
+                db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -76,11 +85,13 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         // GET: Eventos/Edit/5
         public ActionResult Edit(int? id)
         {
+            TempData["MensagemU"] = "Evento Atualizado com Sucesso!";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Evento evento = db.Eventoes.Find(id);
+            Evento evento = db.Eventos.Find(id);
             if (evento == null)
             {
                 return HttpNotFound();
@@ -88,12 +99,12 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
             return View(evento);
         }
 
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Titulo,Descricao")] Evento evento)
         {
-            TempData["MensagemU"] = "Evento Atualizado com Sucesso!";
+
 
             if (ModelState.IsValid)
             {
@@ -107,13 +118,13 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         // GET: Eventos/Delete/5
         public ActionResult Delete(int? id)
         {
-           TempData["MensagemD"] = "Evento Excluido com Sucesso!";
+            TempData["MensagemD"] = "Evento Excluido com Sucesso!";
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Evento evento = db.Eventoes.Find(id);
+            Evento evento = db.Eventos.Find(id);
             if (evento == null)
             {
                 return HttpNotFound();
@@ -126,8 +137,8 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Evento evento = db.Eventoes.Find(id);
-            db.Eventoes.Remove(evento);
+            Evento evento = db.Eventos.Find(id);
+            db.Eventos.Remove(evento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

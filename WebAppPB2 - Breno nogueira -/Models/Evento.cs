@@ -16,6 +16,6 @@ namespace WebAppPB2___Breno_nogueira__.Models
         public string Titulo { get; set; }
         [Required(ErrorMessage = "Descrição Obrigatoria")]
         public string Descricao { get; set; }
-        Tipo Tipo;
+        public Tipo Tipo { get; set; }
     }
 }
