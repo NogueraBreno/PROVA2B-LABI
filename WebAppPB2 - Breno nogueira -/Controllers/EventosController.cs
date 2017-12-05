@@ -16,33 +16,10 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         private EventoContext db = new EventoContext();
 
         // GET: Eventos
-        public ActionResult Index(string ordenacao, int? pagina)
+        public ActionResult Index()
         {
-            ViewBag.OrdenacaoAtual = ordenacao;
-            ViewBag.TituloParam = String.IsNullOrEmpty(ordenacao) ? "Titulo_desc" : "";
-            ViewBag.DescricaoParam = ordenacao == "Tipo" ? "Tipo_desc" : "Tipo";
-
-            var eventos = from e in db.Eventos select e;
-
-            int tamanhoPagina = 3;
-            int numeroPagina = pagina ?? 1;
-
-            switch (ordenacao)
-            {
-                case "Titulo_desc":
-                    eventos = eventos.OrderByDescending(s => s.Titulo);
-                    break;
-                case "Descricao":
-                    eventos = eventos.OrderBy(s => s.Descricao);
-                    break;
-                case "Descricao_desc":
-                    eventos = eventos.OrderByDescending(s => s.Descricao);
-                    break;
-
-            }
-
-
-            return View(eventos.ToPagedList(numeroPagina, tamanhoPagina));
+           
+            return View(db.Eventos.ToList());
         }
 
         // GET: Eventos/Details/5
@@ -153,3 +130,4 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
         }
     }
 }
+

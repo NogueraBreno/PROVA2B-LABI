@@ -1,13 +1,10 @@
-﻿@model PagedList.IPagedList<WebAppPB2___Breno_nogueira__.Models.Evento>
-@using PagedList
-@using PagedList.Mvc
-
+﻿@model IEnumerable<WebAppPB2___Breno_nogueira__.Models.Evento>
 
 @{
     ViewBag.Title = "Eventos";
 }
 
-<h2>Index</h2>
+<h2>Lista de Eventos</h2>
 
 <p>
     @Html.ActionLink("Adicionar Novo Evento", "Create")
@@ -15,31 +12,34 @@
 
 @if (TempData["MensagemC"] != null)
 {
-    <p class="alert-success">@TempData["Mensagem"]</p>
+    <p class="alert-success">@TempData["MensagemC"]</p>
 }
 @if (TempData["MensagemU"] != null)
 {
-    <p class="alert-warning">@TempData["Mensagem2"]</p>
+    <p class="alert-warning">@TempData["MensagemU"]</p>
 }
 @if (TempData["MensagemD"] != null)
 {
-    <p class="alert-danger">@TempData["Mensagem3"]</p>
+    <p class="alert-danger">@TempData["MensagemD"]</p>
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Titulo", "Index", new { ordenacao = ViewBag.TituloParam })
-        </th>
-        <th>
-            @Html.ActionLink("Descrição", "Index", new { ordenacao = ViewBag.DescricaoParam })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th></th>
-    </tr>
+<thead>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
 
+            <th></th>
+        </tr>
+</thead>
+<tbody>
     @foreach (var item in Model)
     {
         <tr>
@@ -60,8 +60,33 @@
         </tr>
     }
 
-</table>
+    </table>
 
-Página @Model.PageNumber de @Model.PageCount
+</tbody>
 
-@Html.PagedListPager(Model, Page => Url.Action("Index", new { pagina = Page, odernacao = ViewBag.OrdenacaoAtual }))
+@section scripts {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+
+       $(document).ready(function () {
+
+           $('table').dataTable({
+
+               "order": [[2, "asc"]],
+
+               "language": {
+
+                   "url": "@Url.Content("~/scripts")/PTBR.json"
+
+               }
+
+           });
+
+       });
+
+    </script>
+
+}
