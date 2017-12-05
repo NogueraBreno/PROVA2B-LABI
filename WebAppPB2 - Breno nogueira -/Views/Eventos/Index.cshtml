@@ -23,22 +23,23 @@
     <p class="alert-danger">@TempData["MensagemD"]</p>
 }
 
-<thead>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
 
-            <th></th>
-        </tr>
-</thead>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
 <tbody>
     @foreach (var item in Model)
     {
@@ -59,10 +60,10 @@
             </td>
         </tr>
     }
-
+</tbody>
     </table>
 
-</tbody>
+
 
 @section scripts {
     <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
