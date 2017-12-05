@@ -47,7 +47,7 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo,Descricao")] Evento evento)
+        public ActionResult Create(Evento evento)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace WebAppPB2___Breno_nogueira__.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titulo,Descricao")] Evento evento)
+        public ActionResult Edit(Evento evento)
         {
 
 

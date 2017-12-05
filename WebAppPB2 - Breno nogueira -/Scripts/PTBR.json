@@ -11,10 +11,10 @@
   "sZeroRecords": "Nenhum registro encontrado",
   "sSearch": "Pesquisar",
   "oPaginate": {
-    "sNext": "Próximo",
+    "sNext": "Proximo",
     "sPrevious": "Anterior",
     "sFirst": "Primeiro",
-    "sLast": "último"
+    "sLast": "Ultimo"
   },
   "oAria": {
     "sSortAscending": ": Ordenar colunas de forma ascendente",
