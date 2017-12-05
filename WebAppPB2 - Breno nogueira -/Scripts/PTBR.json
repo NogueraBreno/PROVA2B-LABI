@@ -1,11 +1,11 @@
 {
   "sEmptyTable": "Nenhum registro encontrado",
-  "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+  "sInfo": "Mostrando de _START_ ate _END_ de _TOTAL_ registros",
   "sInfoEmpty": "Mostrando 0 de 0 registros",
   "sInfoFiltered": "(Filtrados de _MAX_ registros)",
   "sInfoPostFix": "",
   "sInfoThousands": ".",
-  "sLengthMenu": "_MENU_ resultados por página",
+  "sLengthMenu": "_MENU_ resultados por pagina",
   "sLoadingRecords": "Carregando...",
   "sProcessing": "Processando...",
   "sZeroRecords": "Nenhum registro encontrado",
